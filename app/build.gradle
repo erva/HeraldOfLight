@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'io.erva.lordoflight'
+    namespace 'io.erva.heraldoflight'
     compileSdk 33
 
     defaultConfig {
-        applicationId "io.erva.lordoflight"
+        applicationId "io.erva.heraldoflight"
         minSdk 28
         targetSdk 33
         versionCode 1

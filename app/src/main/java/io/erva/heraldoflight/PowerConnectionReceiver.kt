@@ -1,11 +1,11 @@
-package io.erva.lordoflight
+package io.erva.heraldoflight
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.BatteryManager
-import io.erva.lordoflight.MessageWorker.Companion.startWorker
+import io.erva.heraldoflight.MessageWorker.Companion.startWorker
 import timber.log.Timber
 
 class PowerConnectionReceiver : BroadcastReceiver() {

@@ -1,4 +1,4 @@
-package io.erva.lordoflight
+package io.erva.heraldoflight
 
 import android.app.Notification
 import android.app.NotificationChannel

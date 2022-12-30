@@ -1,6 +1,5 @@
-package io.erva.lordoflight
+package io.erva.heraldoflight
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import timber.log.Timber
 import java.io.BufferedInputStream
