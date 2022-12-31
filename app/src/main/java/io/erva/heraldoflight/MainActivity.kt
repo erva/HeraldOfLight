@@ -8,10 +8,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // TODO add runtime permission for notification (Android 13)
 
-        findViewById<Button>(R.id.btn).setOnClickListener {
-            Database(this).status = Pair(true, System.currentTimeMillis())
-            MessageWorker.startWorker(this)
+        findViewById<Button>(R.id.start).setOnClickListener {
+            Database(applicationContext).isOnPause = true
+            ForegroundService.startService(applicationContext)
+        }
+
+        findViewById<Button>(R.id.pause).setOnClickListener {
+            Database(applicationContext).isOnPause = false
         }
     }
 }

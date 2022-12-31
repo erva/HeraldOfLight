@@ -1,12 +1,6 @@
 package io.erva.heraldoflight
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
-import android.content.Context.NOTIFICATION_SERVICE
-import android.graphics.Color
-import androidx.core.app.NotificationCompat
 import androidx.work.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -28,7 +22,6 @@ class MessageWorker(private val context: Context, params: WorkerParameters) :
 
     override fun doWork(): Result {
         Timber.d("")
-        setForegroundAsync(createForegroundInfo())
         val telegramNotifier = TelegramNotifier()
         val database = Database(context)
         val message: String = with(database.status) {
@@ -44,32 +37,11 @@ class MessageWorker(private val context: Context, params: WorkerParameters) :
     }
 
     private fun formatMessage(isCharging: Boolean, time: Long): String {
-        return "temp $isCharging $time"
-    }
-
-    private fun createForegroundInfo(): ForegroundInfo {
-        val id = "id"
-        val title = applicationContext.getString(R.string.app_name)
-        val channelId = createNotificationChannel("channel id", "Channel")
-        val notification = NotificationCompat.Builder(applicationContext, id)
-            .setContentTitle(title)
-            .setChannelId(channelId)
-            .setTicker(title)
-            .setSmallIcon(R.drawable.ic_launcher)
-            .setOngoing(true)
-            .build()
-        return ForegroundInfo(1, notification)
-    }
-
-    private fun createNotificationChannel(channelId: String, channelName: String): String {
-        val chan = NotificationChannel(
-            channelId,
-            channelName, NotificationManager.IMPORTANCE_NONE
-        )
-        chan.lightColor = Color.BLUE
-        chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-        val service = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        service.createNotificationChannel(chan)
-        return channelId
+        val message = if (isCharging) {
+            "✅ Світло увімкнено"
+        } else {
+            "❌ Світло зникло"
+        }
+        return message
     }
 }
